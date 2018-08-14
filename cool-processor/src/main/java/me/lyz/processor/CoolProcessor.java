@@ -6,6 +6,7 @@ import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Set;
@@ -22,6 +23,10 @@ import me.lyz.annotation.CoolAnnotation;
 public class CoolProcessor extends AbstractProcessor {
 
 
+    private static final String ROUTING_CENTER_PATH = "/app/src/main/java";
+
+    private static final String ROUTING_PACKAGE_NAME = "me.lyz.aptdemo";
+
     @Override
     public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment) {
         MethodSpec main = MethodSpec.methodBuilder("main")
@@ -35,10 +40,14 @@ public class CoolProcessor extends AbstractProcessor {
                 .addMethod(main)
                 .build();
 
-        JavaFile javaFile = JavaFile.builder("me.lyz.aptdemo", coolClass)
+        JavaFile javaFile = JavaFile.builder(ROUTING_PACKAGE_NAME, coolClass)
                 .build();
+        
         try {
-            javaFile.writeTo(processingEnv.getFiler());
+            File currentDirectory = new File(".");
+            String directoryPath = getTargetPath(currentDirectory.getCanonicalPath());
+            File targetDirectory = new File(directoryPath);
+            javaFile.writeTo(targetDirectory);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -48,5 +57,9 @@ public class CoolProcessor extends AbstractProcessor {
     @Override
     public Set<String> getSupportedAnnotationTypes() {
         return Collections.singleton(CoolAnnotation.class.getCanonicalName());
+    }
+
+    private String getTargetPath(String currentPath) {
+        return currentPath + ROUTING_CENTER_PATH;
     }
 }
