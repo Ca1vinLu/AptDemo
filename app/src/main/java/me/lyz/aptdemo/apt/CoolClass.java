@@ -1,4 +1,4 @@
-package me.lyz.aptdemo;
+package me.lyz.aptdemo.apt;
 
 import java.lang.String;
 import java.lang.System;

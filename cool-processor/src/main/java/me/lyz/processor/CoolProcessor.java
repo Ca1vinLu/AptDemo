@@ -25,7 +25,7 @@ public class CoolProcessor extends AbstractProcessor {
 
     private static final String ROUTING_CENTER_PATH = "/app/src/main/java";
 
-    private static final String ROUTING_PACKAGE_NAME = "me.lyz.aptdemo";
+    private static final String ROUTING_PACKAGE_NAME = "me.lyz.aptdemo.apt";
 
     @Override
     public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment) {
@@ -42,7 +42,7 @@ public class CoolProcessor extends AbstractProcessor {
 
         JavaFile javaFile = JavaFile.builder(ROUTING_PACKAGE_NAME, coolClass)
                 .build();
-        
+
         try {
             File currentDirectory = new File(".");
             String directoryPath = getTargetPath(currentDirectory.getCanonicalPath());
@@ -51,7 +51,8 @@ public class CoolProcessor extends AbstractProcessor {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return false;
+
+        return true;
     }
 
     @Override
