@@ -8,7 +8,8 @@ import com.squareup.javapoet.TypeSpec;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.annotation.processing.AbstractProcessor;
@@ -17,6 +18,7 @@ import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 
+import me.lyz.annotation.BindActivity;
 import me.lyz.annotation.CoolAnnotation;
 
 @AutoService(Processor.class)
@@ -57,7 +59,10 @@ public class CoolProcessor extends AbstractProcessor {
 
     @Override
     public Set<String> getSupportedAnnotationTypes() {
-        return Collections.singleton(CoolAnnotation.class.getCanonicalName());
+        HashSet<String> supportAnnotationTypes = new LinkedHashSet<>();
+        supportAnnotationTypes.add(CoolAnnotation.class.getCanonicalName());
+        supportAnnotationTypes.add(BindActivity.class.getCanonicalName());
+        return supportAnnotationTypes;
     }
 
     private String getTargetPath(String currentPath) {
