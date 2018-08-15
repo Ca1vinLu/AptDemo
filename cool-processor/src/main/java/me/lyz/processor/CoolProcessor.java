@@ -59,9 +59,9 @@ public class CoolProcessor extends AbstractProcessor {
                 for (Element member : members) {
                     BindView viewBinder = member.getAnnotation(BindView.class);
                     if (viewBinder != null) {
-                        // TODO: 2018/8/15 0015 ID 
-//                        bindViewMethodBuilder.addStatement("activity.$N = activity.findViewById($S)",
-//                                member.getSimpleName(), viewBinder.value());
+                        // TODO: 2018/8/15 0015 ID
+                        bindViewMethodBuilder.addStatement("activity.$N = activity.findViewById($L)",
+                                member.getSimpleName(), viewBinder.value());
                     }
                 }
 
