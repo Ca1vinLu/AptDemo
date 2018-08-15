@@ -9,8 +9,8 @@ import java.lang.annotation.Target;
  * @author LYZ 2018.08.14
  */
 
-@Retention(RetentionPolicy.RUNTIME)
+@Retention(RetentionPolicy.CLASS)
 @Target(ElementType.FIELD)
 public @interface BindView {
-    int id() default 0;
+    int value() default 0;
 }

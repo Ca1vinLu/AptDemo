@@ -31,6 +31,12 @@ public class CoolProcessor extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment) {
+        roundEnvironment.getElementsAnnotatedWith(BindActivity.class);
+
+        return true;
+    }
+
+    private void prcessCoolAnnotation() {
         MethodSpec main = MethodSpec.methodBuilder("main")
                 .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
                 .addParameter(String[].class, "args")
@@ -53,8 +59,6 @@ public class CoolProcessor extends AbstractProcessor {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        return true;
     }
 
     @Override
