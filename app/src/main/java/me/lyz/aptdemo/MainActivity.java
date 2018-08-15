@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import me.lyz.annotation.BindActivity;
 import me.lyz.annotation.BindView;
+import me.lyz.annotation.CoolAnnotation;
 
 @BindActivity
 public class MainActivity extends AppCompatActivity {
@@ -14,9 +15,11 @@ public class MainActivity extends AppCompatActivity {
     TextView mTextView;
 
 
+    @CoolAnnotation
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        MainActivity_ViewBinding.bindView(this);
     }
 }
